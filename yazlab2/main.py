@@ -1,29 +1,29 @@
-import csv
-import nltk
+import pandas as pd
 from nltk.corpus import stopwords
-import string
+import re
 
-with open('bla.txt','r') as f:
-    moby_raw = f.read()
-    stop = set(stopwords.words('english'))
-    moby_tokens = nltk.word_tokenize(moby_raw)
-    text_no_stop_words_punct = [t for t in moby_tokens if t not in stop and t not in string.punctuation]
+stopwords = stopwords.words('english')
+columns = ['Product', 'Issue', 'Company', 'State', 'ZIP code', 'Complaint ID']
+f = pd.read_csv("rows.csv", usecols=columns, dtype={'Product': 'string',
+                                                    'Issue': 'string',
+                                                    'Company': 'string',
+                                                    'State': 'string',
+                                                    'ZIP code': 'string',
+                                                    'Complaint ID': 'int64',
+                                                    })
 
-    print(text_no_stop_words_punct)
+dataset = f.to_string()
+print(dataset)
 
-
-
-
-#CSV KISMI VERİ ALIYORUZ
-rows = []
-with open("rows.csv", 'r',encoding="utf8") as file:
-    csvreader = csv.reader(file)
-    header = next(csvreader)
-    for row in csvreader:
-        rows.append(row)
-#print(header)
-#print(rows)
+for word in stopwords:
+    print(word)
+    dataset = dataset.replace(" "+word+" ", " ")
 
 
+dataset = re.sub(r"[,.;@#?!&$/]+", ' ', dataset)
+# dataset = re.sub(r"\s+", ' ', dataset)
 
-file.close()
+print(dataset)
+f = open("data.txt", "a")
+f.write(dataset)
+f.close()

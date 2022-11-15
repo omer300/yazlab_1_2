@@ -26,7 +26,7 @@ def compare(startValue,threadNumber):
             countSame += 1
     endTime = time.perf_counter()
     fark = (endTime - startTime) * 1000
-    print( startValue," -",countSame,"- ",f"{fark} ms'de tamamlandı.")
+    print( startValue," -",firstValue,countSame,"- ",f"{fark} ms'de tamamlandı.")
 
 
 numberOfThread = 100

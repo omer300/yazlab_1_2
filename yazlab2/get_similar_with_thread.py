@@ -3,7 +3,7 @@ import threading
 import pandas as pd
 import numpy as np
 import time
-
+# dfnin içinden sütün çekmeyi bilmiyorum o çekilip senaryo tamamlancak
 # longsent=0
 content = []  # seçilecek sütun sayısı tutulur
 data_final = []  # son tablo verisi
